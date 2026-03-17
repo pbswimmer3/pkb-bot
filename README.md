@@ -5,6 +5,8 @@ A Discord-native personal knowledge base with semantic search, supporting articl
 ## Features
 
 - **Multi-source ingestion**: URLs, YouTube videos, X/Twitter threads, PDFs
+- **Paywall bypass**: Automatically uses Wayback Machine for archive copies
+- **Auto-summarization**: Posts 3-5 bullet executive summary after ingestion
 - **Smart entity extraction**: People, companies, concepts using transformer-based NER
 - **SQLite + Vector storage**: Local-first with sqlite-vec for embeddings
 - **Hybrid search**: Semantic + BM25 keyword search
