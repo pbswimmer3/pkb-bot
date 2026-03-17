@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  knowledge-base:
+    build: .
+    container_name: pkb-bot
+    restart: unless-stopped
+    
+    # Mount data volume for persistence
+    volumes:
+      - ./data:/app/data
+      
+    # Environment variables
+    environment:
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+      - X_BEARER_TOKEN=${X_BEARER_TOKEN}
+      - DATABASE_PATH=/app/data/knowledge.db
+      - EMBEDDING_MODEL=BAAI/bge-large-en-v1.5
+      - EMBEDDING_DIMENSION=1024
+      - KB_CHANNEL_ID=${KB_CHANNEL_ID:-1481211293242490900}
+      - CHUNK_SIZE=512
+      - CHUNK_OVERLAP=128
+      - DEFAULT_SEARCH_LIMIT=10
+      - TIME_DECAY_DAYS=30
+      - PYTHONUNBUFFERED=1
+      
+    # Or use env file
+    env_file:
+      - .env
+    
+    # Network to reach OpenClaw gateway
+    networks:
+      - openclaw-network
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: Web UI for querying (future enhancement)
+  # web-ui:
+  #   build: .
+  #   container_name: pkb-web
+  #   command: python -m http.server 8080
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./data:/app/data
+
+# Use external network to reach OpenClaw gateway
+networks:
+  openclaw-network:
+    external: true
+    name: openclaw_default
