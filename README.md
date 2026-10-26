@@ -1,5 +1,7 @@
 # Personal Knowledge Base with RAG
 
+> **Status: disabled (2026-10-25).** This bot ran as a Docker container on a self-hosted Hyper-V VM. The VM was shut down on 2026-05-11 and retired on 2026-10-25 during a security cleanup: the Discord bot was removed from every server, and the OpenClaw gateway it used for answers is retired. The code stays here for reference; running it again needs a new Discord bot token and a new model backend. The knowledge base (`data/knowledge.db`) is preserved in an offline backup.
+
 A Discord-native personal knowledge base with semantic search, supporting articles, YouTube videos, X/Twitter threads, and PDFs.
 
 ## Features
